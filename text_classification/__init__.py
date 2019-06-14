@@ -2,8 +2,8 @@
 @author: rui.li
 @contact: xx@xx.com
 @software: PyCharm
-@file: rnn.py
-@time: 2019/6/4 15:45
+@file: __init__.py.py
+@time: 2019/5/24 17:46
 """
 
 
