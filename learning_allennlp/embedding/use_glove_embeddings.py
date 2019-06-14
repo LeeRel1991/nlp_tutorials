@@ -45,7 +45,7 @@ def use_glove():
     vocab_dim = vocab.get_vocab_size('tokens')
     print("vocab: ", vocab.get_vocab_size('labels'), vocab_dim)
 
-    glove_embeddings_file = '/home/lirui/nlp/document-qa/data/glove/glove.840B.300d.txt'
+    glove_embeddings_file = '~/nlp/pretrainedEmbeddings/glove/glove.840B.300d.txt'
 
     # If you want to actually load a pretrained embedding file,
     # you currently need to do that by calling Embedding.from_params()
