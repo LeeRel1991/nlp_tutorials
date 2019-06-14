@@ -18,19 +18,19 @@ from allennlp.modules.text_field_embedders import BasicTextFieldEmbedder
 from allennlp.nn.util import move_to_device, get_text_field_mask
 from allennlp.training import Trainer
 
-from learning_allennlp.dataset import JigsawDatasetReader, tokenizer
+from learning_allennlp.dataset import JigsawDatasetReader, custom_tokenizer
 
-# 目标标签，普通恶评、严重恶评、污言秽语、威胁、侮辱和身份仇视
-from learning_allennlp.sentiment.sst_classifier import MultiLabelClassifier
+
+from learning_allennlp.sentiment.classifier import MultiLabelClassifier
 
 label_cols = ["toxic", "severe_toxic", "obscene",
               "threat", "insult", "identity_hate"]
 
 def main():
     token_indexer = SingleIdTokenIndexer()
-    reader = JigsawDatasetReader(tokenizer=tokenizer,
+    reader = JigsawDatasetReader(tokenizer=custom_tokenizer(),
                                  token_indexers={"tokens": token_indexer},
-                                 label_cols=label_cols)
+                                 )
 
     # Kaggle的多标签“恶意评论分类挑战
     dataset_root = Path('../../data/jigsaw')
@@ -52,7 +52,11 @@ def main():
     encoder = PytorchSeq2VecWrapper(torch.nn.LSTM(embedding_dim, hidden_dim,
                                                   bidirectional=True,
                                                   batch_first=True))
-    model = MultiLabelClassifier(word_embeddings, encoder, len(label_cols), vocab)
+    model = MultiLabelClassifier(word_embeddings,
+                                 0.5,
+                                 encoder,
+                                 0.2,
+                                 len(label_cols), vocab)
 
     # allennlp 目前好像不支持单机多卡，或者支持性能不好
     gpu_id = 0 if torch.cuda.is_available() else -1

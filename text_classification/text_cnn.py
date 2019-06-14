@@ -29,7 +29,7 @@ from allennlp.training import Trainer
 from allennlp.training.metrics import CategoricalAccuracy, F1Measure
 
 from learning_allennlp.dataset import JigsawDatasetReader, custom_tokenizer, MovieReviewDatasetReader
-from learning_allennlp.sentiment.sst_classifier import SSTClassifier, MultiLabelClassifier
+from learning_allennlp.sentiment.classifier import SSTClassifier, MultiLabelClassifier
 from allennlp.data.dataset_readers import StanfordSentimentTreeBankDatasetReader as sstDataReader
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s - %(message)s', level=logging.INFO)
 
