@@ -12,7 +12,7 @@ from pyltp import Segmentor
 from pyltp import Postagger
 from pyltp import NamedEntityRecognizer
 #分句
-with open("./emrData/liran/2246.txt", 'r') as f:
+with open("./emrData/liran/2258.txt", 'r') as f:
     text = f.read()
 print(text)
 sents = SentenceSplitter.split(text)
@@ -41,8 +41,7 @@ pos.release()                                               #释放模型
 
 data = {"words": words, "tags": postags}
 
-for w, t in zip(words, postags):
-    print(w, t)
-#
+print("/".join(["%s %s"%(w,t) for w, t in zip(words, postags)]))
+
 # if __name__ == "__main__":
 #     main()
